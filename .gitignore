@@ -1,0 +1,7 @@
+.idea/
+*.pyc
+venv/
+config/production.py
+config/development.py
+node_modules/
+application/static/output/
