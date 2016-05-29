@@ -139,6 +139,10 @@ def register_routes(app):
     """Register routes."""
     from . import controllers
     from flask.blueprints import Blueprint
+    from .controllers import site, account
+
+    app.register_blueprint(site.bp, url_prefix='')
+    app.register_blueprint(account.bp, url_prefix='/account')
 
     for module in _import_submodules_from_package(controllers):
         bp = getattr(module, 'bp')
