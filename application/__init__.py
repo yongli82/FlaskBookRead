@@ -17,6 +17,7 @@ from werkzeug.contrib.fixers import ProxyFix
 from six import iteritems
 from .utils.account import get_current_user
 from config import load_config
+from flask_admin import Admin
 
 # convert python's encoding to utf8
 try:
@@ -34,6 +35,9 @@ def create_app():
 
     app = Flask(__name__)
     app.config.from_object(config)
+
+    admin = Admin(app, name='microblog', template_mode='bootstrap3')
+    # Add administrative views here
 
     if not hasattr(app, 'production'):
         app.production = not app.debug and not app.testing
@@ -139,9 +143,10 @@ def register_routes(app):
     """Register routes."""
     from . import controllers
     from flask.blueprints import Blueprint
-    from .controllers import site, account
+    from .controllers import site, account, book
 
     app.register_blueprint(site.bp, url_prefix='')
+    app.register_blueprint(book.bp, url_prefix='')
     app.register_blueprint(account.bp, url_prefix='/account')
 
     for module in _import_submodules_from_package(controllers):

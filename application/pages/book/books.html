@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+{% from "_utils.html" import pagination %}
+
+{% block page_title %}Book List{% endblock %}
+{% block page_content %}
+    <style>
+    img.book-cover {
+        width: 80px;
+        height: auto;
+    }
+    </style>
+   <div class="container">
+      <div class="col-sm-8 col-md-10">
+         <h2>书籍列表</h2>
+      <table class="table table-bordered">
+            <tr>
+               <th style="width: 250px;">书名</th>
+               <th>作者</th>
+                <th>简介</th>
+               <th style="width: 120px;">时间</th>
+            </tr>
+            {% for book in book_list.items %}
+
+               <tr>
+                  <td><a href="{{ url_for('book.book_view', book_id=book.id) }}">{% if book.coverImage %}
+                          <img class="book-cover centered" 
+                               src="{{ book.coverImage }}" 
+                               alt="黑客与画家">
+                      {% endif %}
+                     <strong>{{ book.name }}</strong>
+                  </a>
+                  </td>
+                  <td>{{ book.author }}</td>
+                  <td>{{ book.description }}</td>
+                  <td>
+                      {{ book.created_at }}
+                  </td>
+               </tr>
+            {% endfor %}
+         </table>
+
+         {{ pagination(book_list) }}
+      </div>
+   </div>
+{% endblock %}

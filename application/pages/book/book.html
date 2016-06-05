@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block page_title %}{{ book.name }}{% endblock %}
+{% block page_content %}
+    <style>
+        img.book-cover {
+            width: 150px;
+            height: auto;
+        }
+
+        li.chapter {
+            width: 150px;
+            border: 1px solid gainsboro;
+        }
+    </style>
+    <div class="container">
+        <div class="col-sm-8 col-md-10">
+            <h2>{{ book.name }} <small>{{ book.author }}</small></h2>
+
+            <div class="row">
+                <div class="col-sm-4 col-md-2">
+                    <img class="book-cover centered"
+                                            src="{{ book.coverImage }}"
+                                            alt="黑客与画家">
+                </div>
+            <div class="col-sm-4 col-md-8">
+                
+                <div>{{ book.description }}</div>
+             </div>
+            </div>
+                <div class="row">
+                    <h3>章节目录</h3>
+                <ul class="list-inline">
+                    {% for chapter in book_chapters %}
+                        <li class="chapter"><a
+                                href="{{ url_for('book.chapter_view', chapter_id=chapter.id) }}">{{ chapter.name }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

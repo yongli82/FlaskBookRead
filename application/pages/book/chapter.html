@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block page_title %}{{ book_chapter.name }}{% endblock %}
+{% block page_content %}
+    <div class="container">
+        <div class="col-sm-8 col-md-10">
+            <h3>{{ book_chapter.name }}</h3>
+
+            <div class="article">
+                {{ book_chapter.content|safe }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

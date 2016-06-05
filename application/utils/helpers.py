@@ -3,7 +3,14 @@ import os
 import errno
 from flask import current_app, url_for
 
-
+def parse_int(integer, default=None):
+    """提取整数，若失败则返回default值"""
+    try:
+        return int(integer)
+    except Exception, e:
+        return default
+    
+    
 def absolute_url_for(endpoint, **values):
     """Absolute url for endpoint."""
     config = current_app.config
